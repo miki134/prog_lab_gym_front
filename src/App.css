@@ -10,7 +10,7 @@ p {
    text-align: center;
    font-weight: 500;
 }
-input[type=text],input[type=email], select, textarea {
+input[type=text],input, select, textarea {
    width: 100%;
    padding: 12px;
    border: 1px solid #ccc;
