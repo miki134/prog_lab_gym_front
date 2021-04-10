@@ -195,3 +195,41 @@ export const updateUser = (token, name, surname, email, password, role) => {
     };
   }
 }
+
+const allTrainersSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ALL_TRAINERS_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const allTrainersFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ALL_TRAINERS_FAILED,
+    payload: {
+      getAllTrainersError: err.data.error,
+    },
+  };
+}
+
+const allTrainersStarted = () => {
+  return {
+    type: OPERATIONS.ALL_TRAINERS_STARTED,
+  };
+}
+
+export const getAllTrainers = () => {
+  return async (dispatch) => {
+    dispatch(allTrainersStarted());
+    try {
+      const response = await api.getAllTrainers();
+      dispatch(allTrainersSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(allTrainersFailed(err.response));
+    };
+  }
+}

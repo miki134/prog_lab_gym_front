@@ -7,4 +7,5 @@ export const ENDPOINTS = {
     GET_USERS: 'users/read_all_users.php',
     GET_USER: 'users/read_one.php',
     UPDATE_USER: 'users/update.php',
+    GET_TRAINERS: 'trainers/read_all_trainers.php',
 };

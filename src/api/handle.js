@@ -50,6 +50,9 @@ const updateUser = async (token, name, surname, email, password, role) => {
     }, token)
 }
 
+const getAllTrainers = async () => {
+    return await request(ENDPOINTS.GET_TRAINERS,{})
+}
 
 const api = {
     register,
@@ -57,6 +60,7 @@ const api = {
     getAllUsers,
     getOneUser,
     updateUser,
+    getAllTrainers,
 };
 
 export default api;

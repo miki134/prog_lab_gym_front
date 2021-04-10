@@ -3,16 +3,25 @@ import {AUTH, OPERATIONS} from './actionTypes';
 const initialState = {
   token: '',
   data: '',
+
   loginError: '',
   loginActionEnded: false,
+
   registerError: '',
   registerActionEnded: false,
+
   getAllUsersError: '',
   getAllUsersActionEnded: false,
+
   getOneUserError: '',
   getOneUserActionEnded: false,
+
   updateUserError: '',
   updateUserActionEnded: false,
+
+  
+  getAllTrainersError: '',
+  getAllTrainersActionEnded: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -125,6 +134,28 @@ const authReducer = (state = initialState, action) => {
         updateUserError: action.payload.updateUserError,
       }
     }
+    case OPERATIONS.ALL_TRAINERS_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        getAllTrainersActionEnded: true,
+      }
+    }
+    case OPERATIONS.ALL_TRAINERS_STARTED: {
+      return {
+        ...state,
+        getAllTrainersActionEnded: false,
+      }
+    }
+    case OPERATIONS.ALL_TRAINERS_FAILED: {
+      console.log(action.payload.getAllTrainersError);
+      return {
+        ...state,
+        getAllTrainersActionEnded: false,
+        getAllTrainersError: action.payload.getAllTrainersError,
+      }
+    }
+
     default: {
       return state;
     }
