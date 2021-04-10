@@ -4,7 +4,7 @@ import styles from './styles.js';
 import { logoutUser } from '../../auth/actions.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Switch,Route} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Home from '../pages/Home/Home.js';
 import About from '../pages/About/About.js';
@@ -14,6 +14,8 @@ import UserPage from '../pages/userPage/userPage.js';
 import AllUsers from '../pages/userPage/allUsers.js';
 import UpdateUser from '../pages/userPage/updateUser.js';
 import Contact from '../pages/Contact/contact.js';
+import Trainers from '../pages/Trainers/trainers.js';
+import DropDownList from './DropDownList.js';
 
 const NavLinkBox = (props) => {
     const [hover, setHover] = useState(false);
@@ -34,61 +36,6 @@ const NavLinkBox = (props) => {
         </li>
     );
 }
-
-const DropDownButton = (props) => {
-    const [hover, setHover] = useState(false);
-
-    return (
-        <li
-            onMouseEnter={() => {
-                setHover(true);
-            }}
-            onMouseLeave={() => {
-                setHover(false);
-            }}
-
-            style={{
-                ...styles.dropdownItem,
-                ...(hover ? styles.hover : null)
-            }}>
-            <Link style={styles.a} {...props}></Link>
-        </li>
-    );
-}
-
-const DropDownList = (props) => {
-    const [hover, setHover] = useState(false);
-
-    return (
-        <li
-            onMouseEnter={() => {
-                setHover(true);
-            }}
-            onMouseLeave={() => {
-                setHover(false);
-            }}
-            style={{
-                ...styles.navBox,
-                ...(hover ? styles.hover : null)
-            }}>
-            <div style={styles.a} {...props}></div>
-            <ol
-                style={{
-                    ...styles.dropdown,
-                    ...styles.hide,
-                    ...(hover ? styles.show : null)
-                }}>
-                <DropDownButton to='workouts'>Treningi</DropDownButton>
-                <DropDownButton to='diets'>Diety</DropDownButton>
-                <DropDownButton to='gym'>Sprzęt</DropDownButton>
-                <DropDownButton to='trainers'>Trenerzy</DropDownButton>
-            </ol>
-        </li>
-    );
-}
-
-
-
 
 function Navigation(props) {
     // const [token, setToken] = useState('');
@@ -170,6 +117,9 @@ function Navigation(props) {
                     <Route exact path="/contact">
                         <Contact />
                     </Route>
+                    <Route exact path="/trainers">
+                        <Trainers />
+                    </Route>
                 </Switch>
             </div>
         </div>
@@ -196,7 +146,6 @@ const mapStateToProps = (state) => {
         token: state.auth.token,
         error: state.auth.error,
         data: state.auth.data,
-        isLoggedIn: state.auth.loginActionEnded,
     };
 };
 
