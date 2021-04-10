@@ -63,7 +63,3 @@ const styles = {
 
 
 export default styles;
-
-// {width: '600px', height: '300px', overflow: 'auto', margin: '0px',}
-
-// {  margin: '0px',border: '1px solid black'}

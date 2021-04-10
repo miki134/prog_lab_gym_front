@@ -17,6 +17,7 @@ import Contact from '../pages/Contact/contact.js';
 import Trainers from '../pages/Trainers/trainers.js';
 import DropDownList from './DropDownList.js';
 import Equipment from '../pages/Equipment/Equipment.js';
+import Workouts from '../pages/Workouts/workouts.js';
 
 const NavLinkBox = (props) => {
     const [hover, setHover] = useState(false);
@@ -123,6 +124,9 @@ function Navigation(props) {
                     </Route>
                     <Route exact path="/gym">
                         <Equipment />
+                    </Route>
+                    <Route exact path="/workouts">
+                        <Workouts />
                     </Route>
                 </Switch>
             </div>

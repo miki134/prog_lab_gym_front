@@ -9,4 +9,5 @@ export const ENDPOINTS = {
     UPDATE_USER: 'users/update.php',
     GET_TRAINERS: 'trainers/read_all_trainers.php',
     GET_EQUIPMENT: 'equipment/read_all_equipment.php',
+    GET_WORKOUTS: 'workouts/read_all_workouts.php',
 };

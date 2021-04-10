@@ -33,12 +33,7 @@ export const registerUser = (name, surname, email, password) => {
       const response = await api.register(name, surname, email, password);
       dispatch(userRegistrationSucceeded(response.token));
     } catch (err) {
-      // console.log(err.response);
-      // if (err.code === 401) {
-      //   dispatch(logoutUser());
-      // } else {
       dispatch(userRegistrationFailed(err.response));
-      // }
     }
   };
 };
@@ -268,6 +263,44 @@ export const getAllEquipment = () => {
     } catch (err) {
       console.log(err.response);
       dispatch(allEquipmentFailed(err.response));
+    };
+  }
+}
+
+const allWorkoutsSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ALL_WORKOUTS_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const allWorkoutsFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ALL_WORKOUTS_FAILED,
+    payload: {
+      getAllWorkoutsError: err.data.error,
+    },
+  };
+}
+
+const allWorkoutsStarted = () => {
+  return {
+    type: OPERATIONS.ALL_WORKOUTS_STARTED,
+  };
+}
+
+export const getAllWorkouts = () => {
+  return async (dispatch) => {
+    dispatch(allWorkoutsStarted());
+    try {
+      const response = await api.getAllWorkouts();
+      dispatch(allWorkoutsSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(allWorkoutsFailed(err.response));
     };
   }
 }

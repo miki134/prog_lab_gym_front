@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllEquipment } from '../../../auth/actions.js';
 import React, { useState, useEffect } from 'react';
-import styles from './styles.js';
+import styles from '../../Table/styles.js';
 import Error from '../../Error/index.js';
 
 const Equipment = (props) => {

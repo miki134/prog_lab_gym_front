@@ -28,4 +28,8 @@ export const OPERATIONS = {
   ALL_EQUIPMENT_SUCCEEDED: 'operations/all_equipment_succeeded',
   ALL_EQUIPMENT_STARTED: 'operations/all_equipment_started',
   ALL_EQUIPMENT_FAILED: 'operations/all_equipment_failed',
+
+  ALL_WORKOUTS_SUCCEEDED: 'operations/all_workouts_succeeded',
+  ALL_WORKOUTS_FAILED: 'operations/all_workouts_started',
+  ALL_WORKOUTS_STARTED: 'operations/all_workouts_failed',
 }

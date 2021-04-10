@@ -1,28 +1,28 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllTrainers } from '../../../auth/actions.js';
+import { getAllWorkouts } from '../../../auth/actions.js';
 import React, { useState, useEffect } from 'react';
 import styles from '../../Table/styles.js';
 import Error from '../../Error/index.js';
 
-const Trainers = (props) => {
+const Workouts = (props) => {
     const [isMounted, setMounted] = useState(false);
     const [downloaded, setdownloaded] = useState(false);
-
+    console.log('asdas');
     if(!isMounted)
     {
         setMounted(true);
-        props.getAllTrainers();
+        props.getAllWorkouts();
     };
     
-    useEffect(() => {setdownloaded(props.getAllTrainersActionEnded);}, [props.getAllTrainersActionEnded]);
+    useEffect(() => {setdownloaded(props.getAllWorkoutsActionEnded);}, [props.getAllWorkoutsActionEnded]);
 
     let keyId = 0;
     return (
         <div style={styles.outTab}>
             {downloaded &&
                 <table style={styles.styledTable}>
-                    <thead style={styles.styledHeader}><tr ><th style={styles.styledHeader}>Name</th><th>Surname</th><th>Birthday</th><th>Phone</th><th>Description</th></tr></thead>
+                    <thead style={styles.styledHeader}><tr ><th style={styles.styledHeader}>Name</th><th>Length Of Time</th><th>Quantity Of Exercises</th><th>Difficulty</th><th>Description</th></tr></thead>
                     <tbody style={styles.styledBody}>
                         {props.data.map(item => {
                             return (<tr key={++keyId} >{item.map(it => {
@@ -33,8 +33,8 @@ const Trainers = (props) => {
                     </tbody>
                 </table>
             }
-            {props.getAllTrainersError && 
-            <Error>{props.getAllTrainersError}</Error>}
+            {props.getAllWorkoutsError && 
+            <Error>{props.getAllWorkoutsError}</Error>}
         </div>
     );
 }
@@ -42,8 +42,8 @@ const Trainers = (props) => {
 const mapStateToProps = (state) => {
     return {
         data: state.auth.data,
-        getAllTrainersError: state.auth.getAllTrainersError,
-        getAllTrainersActionEnded: state.auth.getAllTrainersActionEnded,
+        getAllWorkoutsError: state.auth.getAllWorkoutsError,
+        getAllWorkoutsActionEnded: state.auth.getAllWorkoutsActionEnded,
 
     };
 };
@@ -51,10 +51,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            getAllTrainers,
+            getAllWorkouts,
         },
         dispatch,
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Trainers);
+export default connect(mapStateToProps, mapDispatchToProps)(Workouts);
