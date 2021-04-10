@@ -1,0 +1,45 @@
+/* .navManu a {
+    background-color: rgb(194, 194, 194);
+    text-decoration: none;
+    width: 45vw;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* .navManu a:hover{
+    background-color: rgb(210, 210, 210);
+} */
+/* .navManu{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;    
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    float: right;
+} */
+
+.main {
+    justify-content: center;
+    /* height: 500px; */
+    text-align: center;
+}
+
+.divImg img{
+    margin: 0px;
+
+}
+
+.prod {
+    background-color: gray;
+    height: 50px;
+    text-align: center;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
