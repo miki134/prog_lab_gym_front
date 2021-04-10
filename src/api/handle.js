@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASE_API_URL, ENDPOINTS } from './constants.js';
 
 const request = async (endpoint, data, token = '', method = 'POST') => {
-    // console.log(data);
+    console.log(data);
     const url = BASE_API_URL + endpoint;
     const response = await axios({
         method: `${method}`,
@@ -54,6 +54,10 @@ const getAllTrainers = async () => {
     return await request(ENDPOINTS.GET_TRAINERS,{})
 }
 
+const getAllEquipment = async () => {
+    return await request(ENDPOINTS.GET_EQUIPMENT,{})
+}
+
 const api = {
     register,
     login,
@@ -61,6 +65,7 @@ const api = {
     getOneUser,
     updateUser,
     getAllTrainers,
+    getAllEquipment,
 };
 
 export default api;

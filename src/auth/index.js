@@ -22,6 +22,9 @@ const initialState = {
   
   getAllTrainersError: '',
   getAllTrainersActionEnded: false,
+
+  getAllEquipmentError: '',
+  getAllEquipmentActionEnded: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -153,6 +156,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         getAllTrainersActionEnded: false,
         getAllTrainersError: action.payload.getAllTrainersError,
+      }
+    }
+
+    case OPERATIONS.ALL_EQUIPMENT_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        getAllEquipmentActionEnded: true,
+      }
+    }
+    case OPERATIONS.ALL_TRAINALL_EQUIPMENT_STARTEDERS_STARTED: {
+      return {
+        ...state,
+        getAllEquipmentActionEnded: false,
+      }
+    }
+    case OPERATIONS.ALL_EQUIPMENT_FAILED: {
+      console.log(action.payload.getAllEquipmentError);
+      return {
+        ...state,
+        getAllEquipmentActionEnded: false,
+        getAllEquipmentError: action.payload.getAllEquipmentError,
       }
     }
 

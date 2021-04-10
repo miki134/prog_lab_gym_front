@@ -233,3 +233,41 @@ export const getAllTrainers = () => {
     };
   }
 }
+
+const allEquipmentSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ALL_EQUIPMENT_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const allEquipmentFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ALL_EQUIPMENT_FAILED,
+    payload: {
+      getAllEquipmentError: err.data.error,
+    },
+  };
+}
+
+const allEquipmentStarted = () => {
+  return {
+    type: OPERATIONS.ALL_EQUIPMENT_STARTED,
+  };
+}
+
+export const getAllEquipment = () => {
+  return async (dispatch) => {
+    dispatch(allEquipmentStarted());
+    try {
+      const response = await api.getAllEquipment();
+      dispatch(allEquipmentSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(allEquipmentFailed(err.response));
+    };
+  }
+}
