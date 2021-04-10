@@ -304,3 +304,41 @@ export const getAllWorkouts = () => {
     };
   }
 }
+
+const allDietsSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ALL_DIETS_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const allDietsFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ALL_DIETS_FAILED,
+    payload: {
+      getAllDietsError: err.data.error,
+    },
+  };
+}
+
+const allDietsStarted = () => {
+  return {
+    type: OPERATIONS.ALL_DIETS_STARTED,
+  };
+}
+
+export const getAllDiets = () => {
+  return async (dispatch) => {
+    dispatch(allDietsStarted());
+    try {
+      const response = await api.getAllDiets();
+      dispatch(allDietsSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(allDietsFailed(err.response));
+    };
+  }
+}

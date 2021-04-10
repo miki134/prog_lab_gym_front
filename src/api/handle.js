@@ -62,6 +62,10 @@ const getAllWorkouts = async () => {
     return await request(ENDPOINTS.GET_WORKOUTS,{})
 }
 
+const getAllDiets = async () => {
+    return await request(ENDPOINTS.GET_DIETS,{})
+}
+
 const api = {
     register,
     login,
@@ -71,6 +75,7 @@ const api = {
     getAllTrainers,
     getAllEquipment,
     getAllWorkouts,
+    getAllDiets,
 };
 
 export default api;

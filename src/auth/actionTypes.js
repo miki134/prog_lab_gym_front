@@ -32,4 +32,8 @@ export const OPERATIONS = {
   ALL_WORKOUTS_SUCCEEDED: 'operations/all_workouts_succeeded',
   ALL_WORKOUTS_FAILED: 'operations/all_workouts_started',
   ALL_WORKOUTS_STARTED: 'operations/all_workouts_failed',
+
+  ALL_DIETS_SUCCEEDED: 'operations/all_diets_succeeded',
+  ALL_DIETS_FAILED: 'operations/all_diets_started',
+  ALL_DIETS_STARTED: 'operations/all_diets_failed',
 }

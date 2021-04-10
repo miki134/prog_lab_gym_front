@@ -1,4 +1,4 @@
-import {AUTH, OPERATIONS} from './actionTypes';
+import { AUTH, OPERATIONS } from './actionTypes';
 
 const initialState = {
   token: '',
@@ -19,7 +19,7 @@ const initialState = {
   updateUserError: '',
   updateUserActionEnded: false,
 
-  
+
   getAllTrainersError: '',
   getAllTrainersActionEnded: false,
 
@@ -29,6 +29,8 @@ const initialState = {
   getAllWorkoutsError: '',
   getAllWorkoutsActionEnded: false,
 
+  getAllDietsError: '',
+  getAllDietsActionEnded: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -202,6 +204,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         getAllWorkoutsActionEnded: false,
         getAllWorkoutsError: action.payload.getAllWorkoutsError,
+      }
+    }
+    case OPERATIONS.ALL_DIETS_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        getAllDietsActionEnded: true,
+      }
+    }
+    case OPERATIONS.ALL_DIETS_STARTED:
+      {
+        return {
+          ...state,
+          getAllDietsActionEnded: false,
+        }
+      }
+    case OPERATIONS.ALL_DIETS_FAILED: {
+      console.log(action.payload.getAllDietsError);
+      return {
+        ...state,
+        getAllDietsActionEnded: false,
+        getAllDietsError: action.payload.getAllDietsError,
       }
     }
     default: {

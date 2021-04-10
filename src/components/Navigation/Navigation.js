@@ -18,6 +18,7 @@ import Trainers from '../pages/Trainers/trainers.js';
 import DropDownList from './DropDownList.js';
 import Equipment from '../pages/Equipment/Equipment.js';
 import Workouts from '../pages/Workouts/workouts.js';
+import Diets from '../pages/DIets/diets.js';
 
 const NavLinkBox = (props) => {
     const [hover, setHover] = useState(false);
@@ -127,6 +128,9 @@ function Navigation(props) {
                     </Route>
                     <Route exact path="/workouts">
                         <Workouts />
+                    </Route>
+                    <Route exact path="/diets">
+                        <Diets />
                     </Route>
                 </Switch>
             </div>

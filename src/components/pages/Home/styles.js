@@ -13,10 +13,19 @@ const mainPage = {
     width: '100%',
 }
 
+const fl = {
+    textDecoration: 'none',
+    color: 'black',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}
+
 const styles = {
     slider,
     mainPage,
     subslider,
+    fl,
 }
 
 export default styles;
