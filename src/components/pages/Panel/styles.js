@@ -18,9 +18,14 @@ const optionInput = {
     resize: 'vertical',
 }
 
+const update = {
+    width: '500px',
+}
+
 const styles = {
     container,
     optionInput,
+    update,
 }
 
 export default styles;

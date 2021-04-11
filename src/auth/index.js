@@ -26,6 +26,9 @@ const initialState = {
   getAllEquipmentError: '',
   getAllEquipmentActionEnded: false,
 
+  addEquipmentError: '',
+  addEquipmentActionEnded: false,
+
   getAllWorkoutsError: '',
   getAllWorkoutsActionEnded: false,
 
@@ -276,6 +279,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         addDietActionEnded: false,
         addDietError: action.payload.addDietError,
+      }
+    }
+    case OPERATIONS.ADD_EQUIPMENT_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        addEquipmentActionEnded: true,
+      }
+    }
+    case OPERATIONS.ADD_EQUIPMENT_STARTED:
+      {
+        return {
+          ...state,
+          addEquipmentActionEnded: false,
+        }
+      }
+    case OPERATIONS.ADD_EQUIPMENT_FAILED: {
+      console.log(action.payload.addEquipmentError);
+      return {
+        ...state,
+        addEquipmentActionEnded: false,
+        addEquipmentError: action.payload.addEquipmentError,
       }
     }
     default: {

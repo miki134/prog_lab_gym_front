@@ -31,17 +31,17 @@ const login = async (email, password) => {
 };
 
 const getAllUsers = async (token) => {
-    return await request(ENDPOINTS.GET_USERS,{}, token)
+    return await request(ENDPOINTS.GET_USERS, {}, token)
 }
 
 const getOneUser = async (token) => {
     console.log(token);
-    return await request(ENDPOINTS.GET_USER,{}, token)
+    return await request(ENDPOINTS.GET_USER, {}, token)
 }
 
 
 const updateUser = async (token, name, surname, email, password, role) => {
-    return await request(ENDPOINTS.UPDATE_USER,{
+    return await request(ENDPOINTS.UPDATE_USER, {
         name,
         surname,
         email,
@@ -51,23 +51,23 @@ const updateUser = async (token, name, surname, email, password, role) => {
 }
 
 const getAllTrainers = async () => {
-    return await request(ENDPOINTS.GET_TRAINERS,{})
+    return await request(ENDPOINTS.GET_TRAINERS, {})
 }
 
 const getAllEquipment = async () => {
-    return await request(ENDPOINTS.GET_EQUIPMENT,{})
+    return await request(ENDPOINTS.GET_EQUIPMENT, {})
 }
 
 const getAllWorkouts = async () => {
-    return await request(ENDPOINTS.GET_WORKOUTS,{})
+    return await request(ENDPOINTS.GET_WORKOUTS, {})
 }
 
 const getAllDiets = async () => {
-    return await request(ENDPOINTS.GET_DIETS,{})
+    return await request(ENDPOINTS.GET_DIETS, {})
 }
 
 const addWorkout = async (token, name, lengthOfTime, quantityOfExercises, difficulty, description) => {
-    return await request(ENDPOINTS.ADD_WORKOUT,{
+    return await request(ENDPOINTS.ADD_WORKOUT, {
         name,
         lengthOfTime,
         quantityOfExercises,
@@ -78,12 +78,23 @@ const addWorkout = async (token, name, lengthOfTime, quantityOfExercises, diffic
 
 
 const addDiet = async (token, name, quantityOfProducts, numberOfMealsPerDay, meat, description) => {
-    return await request(ENDPOINTS.ADD_DIET,{
+    return await request(ENDPOINTS.ADD_DIET, {
         name,
         quantityOfProducts,
         numberOfMealsPerDay,
         meat,
         description,
+    }, token)
+}
+const addEquipment = async (token, name, length, height, width, weight, description) => {
+    return await request(ENDPOINTS.ADD_EQUIPMENT, {
+        token,
+        name,
+        length,
+        height,
+        width,
+        weight,
+        description
     }, token)
 }
 
@@ -99,6 +110,7 @@ const api = {
     getAllDiets,
     addWorkout,
     addDiet,
+    addEquipment,
 };
 
 export default api;

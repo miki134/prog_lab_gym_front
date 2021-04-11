@@ -418,3 +418,41 @@ export const addDiet = (token, name, quantityOfProducts, numberOfMealsPerDay, me
     };
   }
 }
+
+const addEquipmentSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ADD_EQUIPMENT_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const addEquipmentFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ADD_EQUIPMENT_FAILED,
+    payload: {
+      addEquipmentError: err.data.error,
+    },
+  };
+}
+
+const addEquipmentStarted = () => {
+  return {
+    type: OPERATIONS.ADD_EQUIPMENT_STARTED,
+  };
+}
+
+export const addEquipment = (token, name, length, height, width, weight, description) => {
+  return async (dispatch) => {
+    dispatch(addEquipmentStarted());
+    try {
+      const response = await api.addEquipment(token, name, length, height, width, weight, description);
+      dispatch(addEquipmentSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(addEquipmentFailed(err.response));
+    };
+  }
+}

@@ -29,17 +29,21 @@ export const OPERATIONS = {
   ALL_EQUIPMENT_STARTED: 'operations/all_equipment_started',
   ALL_EQUIPMENT_FAILED: 'operations/all_equipment_failed',
 
+  ADD_EQUIPMENT_SUCCEEDED: 'operations/add_equipment_succeeded',
+  ADD_EQUIPMENT_FAILED: 'operations/add_equipment_started',
+  ADD_EQUIPMENT_STARTED: 'operations/add_equipment_failed',
+
   ALL_WORKOUTS_SUCCEEDED: 'operations/all_workouts_succeeded',
   ALL_WORKOUTS_FAILED: 'operations/all_workouts_started',
   ALL_WORKOUTS_STARTED: 'operations/all_workouts_failed',
 
-  ALL_DIETS_SUCCEEDED: 'operations/all_diets_succeeded',
-  ALL_DIETS_FAILED: 'operations/all_diets_started',
-  ALL_DIETS_STARTED: 'operations/all_diets_failed',
-
   ADD_WORKOUT_SUCCEEDED: 'operations/add_workout_succeeded',
   ADD_WORKOUT_FAILED: 'operations/add_workout_started',
   ADD_WORKOUT_STARTED: 'operations/add_workout_failed',
+
+  ALL_DIETS_SUCCEEDED: 'operations/all_diets_succeeded',
+  ALL_DIETS_FAILED: 'operations/all_diets_started',
+  ALL_DIETS_STARTED: 'operations/all_diets_failed',
 
   ADD_DIET_SUCCEEDED: 'operations/add_diet_succeeded',
   ADD_DIET_FAILED: 'operations/add_diet_started',

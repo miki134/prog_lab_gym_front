@@ -6,6 +6,7 @@ import styles from './styles.js';
 import Error from '../../Error/index.js';
 import AddWorkouts from './AddWorkouts.js';
 import AddDiets from './AddDiets.js';
+import AddEquipment from './AddEquipment.js';
 
 const Panel = (props) => {
     const [isMounted, setMounted] = useState(false);
@@ -70,7 +71,7 @@ const Panel = (props) => {
                 {addDiets &&
                     <AddDiets></AddDiets>}
                 {addEquipment &&
-                    <div>{'addEquipment'}</div>}
+                    <AddEquipment></AddEquipment>}
                 {addTrainers &&
                     <div>{'addTrainers'}</div>}
             {props.getAllPanelError &&
