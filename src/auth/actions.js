@@ -342,3 +342,41 @@ export const getAllDiets = () => {
     };
   }
 }
+
+const addWorkoutSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ADD_WORKOUT_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const addWorkoutFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ADD_WORKOUT_FAILED,
+    payload: {
+      addWorkoutError: err.data.error,
+    },
+  };
+}
+
+const addWorkoutStarted = () => {
+  return {
+    type: OPERATIONS.ADD_WORKOUT_STARTED,
+  };
+}
+
+export const addWorkout = (token, name, lengthOfTime, quantityOfExercises, difficulty, description) => {
+  return async (dispatch) => {
+    dispatch(addWorkoutStarted());
+    try {
+      const response = await api.addWorkout(token, name, lengthOfTime, quantityOfExercises, difficulty, description);
+      dispatch(addWorkoutSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(addWorkoutFailed(err.response));
+    };
+  }
+}

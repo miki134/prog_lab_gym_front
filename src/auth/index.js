@@ -29,6 +29,9 @@ const initialState = {
   getAllWorkoutsError: '',
   getAllWorkoutsActionEnded: false,
 
+  addWorkoutError: '',
+  addWorkoutActionEnded: false,
+
   getAllDietsError: '',
   getAllDietsActionEnded: false,
 }
@@ -226,6 +229,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         getAllDietsActionEnded: false,
         getAllDietsError: action.payload.getAllDietsError,
+      }
+    }
+    case OPERATIONS.ADD_WORKOUT_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        addWorkoutActionEnded: true,
+      }
+    }
+    case OPERATIONS.ADD_WORKOUT_STARTED:
+      {
+        return {
+          ...state,
+          addWorkoutActionEnded: false,
+        }
+      }
+    case OPERATIONS.ADD_WORKOUT_FAILED: {
+      console.log(action.payload.addWorkoutError);
+      return {
+        ...state,
+        addWorkoutActionEnded: false,
+        addWorkoutError: action.payload.addWorkoutError,
       }
     }
     default: {

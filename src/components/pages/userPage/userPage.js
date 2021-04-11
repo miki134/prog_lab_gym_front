@@ -39,11 +39,13 @@ const UserPage = (props) => {
                 <div>
                     <Input type='button' value='Pokaż liste użytkowników' onClick={getAllUsers} />{redAllUsers()}
                     <Input type='button' value='Zmień dane' onClick={getOneUser} />{redOneUser()}
-                    <Link to='/mypage/update'><Input type='button' value='Zmień dane' /></Link>
-                    <Link to='/'><Input type='button' value='asd' /></Link>
+                    <Link to='/panel'><Input type='button' value='Panel sterowania' /></Link>
+                    {/* <Link to='/'><Input type='button' value='asd' /></Link> */}
                 </div>
             }
             {!props.token && <Error>Sesja wygasla! Zaloguj sie!</Error>}
+            {props.getAllUsersError && <Error>{props.getAllUsersError}</Error>}
+            {props.getOneUserError && <Error>{props.getOneUserError}</Error>}
         </div>
     );
 }

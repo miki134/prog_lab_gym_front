@@ -10,5 +10,6 @@ export const ENDPOINTS = {
     GET_TRAINERS: 'trainers/read_all_trainers.php',
     GET_EQUIPMENT: 'equipment/read_all_equipment.php',
     GET_WORKOUTS: 'workouts/read_all_workouts.php',
+    ADD_WORKOUT: 'workouts/create.php',
     GET_DIETS: 'diets/read_all_diets.php',
 };

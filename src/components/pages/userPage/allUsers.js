@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllUsers } from '../../../auth/actions.js';
+import Error from '../../Error/index.js';
 import styles from './styles.js';
 
 const AllUsers = (props) => {
@@ -18,7 +19,8 @@ const AllUsers = (props) => {
                     })}
                 </tbody>
             </table>}
-            {props.getAllUsersError && <div style={styles.error}>{props.getAllUsersError}</div>}
+            {!props.token && <Error>Sesja wygasla! Zaloguj sie!</Error>}
+            {props.getAllUsersError && <Error>{props.getAllUsersError}</Error>}
         </div>
     );
 }
