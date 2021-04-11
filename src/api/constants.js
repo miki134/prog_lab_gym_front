@@ -12,4 +12,5 @@ export const ENDPOINTS = {
     GET_WORKOUTS: 'workouts/read_all_workouts.php',
     ADD_WORKOUT: 'workouts/create.php',
     GET_DIETS: 'diets/read_all_diets.php',
+    ADD_DIET: 'diets/create.php',
 };

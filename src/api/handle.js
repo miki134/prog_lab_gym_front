@@ -77,6 +77,16 @@ const addWorkout = async (token, name, lengthOfTime, quantityOfExercises, diffic
 }
 
 
+const addDiet = async (token, name, quantityOfProducts, numberOfMealsPerDay, meat, description) => {
+    return await request(ENDPOINTS.ADD_DIET,{
+        name,
+        quantityOfProducts,
+        numberOfMealsPerDay,
+        meat,
+        description,
+    }, token)
+}
+
 const api = {
     register,
     login,
@@ -88,6 +98,7 @@ const api = {
     getAllWorkouts,
     getAllDiets,
     addWorkout,
+    addDiet,
 };
 
 export default api;

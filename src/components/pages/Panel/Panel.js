@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllPanel } from '../../../auth/actions.js';
-import React, { useState, useEffect } from 'react';
+// import { getAllPanel } from '../../../auth/actions.js';s
+import React, { useState } from 'react';
 import styles from './styles.js';
 import Error from '../../Error/index.js';
 import AddWorkouts from './AddWorkouts.js';
+import AddDiets from './AddDiets.js';
 
 const Panel = (props) => {
     const [isMounted, setMounted] = useState(false);
-    const [downloaded, setdownloaded] = useState(false);
-    const [firstClick, setFirstClick] = useState(false);
+    // const [downloaded, setdownloaded] = useState(false);
+    // const [firstClick, setFirstClick] = useState(false);
 
     const [addWorkouts, setAddWorkouts] = useState(false);
     const [addDiets, setAddDiets] = useState(false);
@@ -19,7 +20,7 @@ const Panel = (props) => {
 
     const [value, setValue] = useState('default');
 
-    useEffect(() => { setdownloaded(props.getAllPanelActionEnded); }, [props.getAllPanelActionEnded]);
+    // useEffect(() => { setdownloaded(props.getAllPanelActionEnded); }, [props.getAllPanelActionEnded]);
 
     if (!isMounted) {
         setMounted(true);
@@ -67,7 +68,7 @@ const Panel = (props) => {
                 {addWorkouts &&
                     <AddWorkouts></AddWorkouts>}
                 {addDiets &&
-                    <div>{'addDiets'}</div>}
+                    <AddDiets></AddDiets>}
                 {addEquipment &&
                     <div>{'addEquipment'}</div>}
                 {addTrainers &&

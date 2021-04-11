@@ -380,3 +380,41 @@ export const addWorkout = (token, name, lengthOfTime, quantityOfExercises, diffi
     };
   }
 }
+
+const addDietSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ADD_DIET_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const addDietFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ADD_DIET_FAILED,
+    payload: {
+      addDietError: err.data.error,
+    },
+  };
+}
+
+const addDietStarted = () => {
+  return {
+    type: OPERATIONS.ADD_DIET_STARTED,
+  };
+}
+
+export const addDiet = (token, name, quantityOfProducts, numberOfMealsPerDay, meat, description) => {
+  return async (dispatch) => {
+    dispatch(addDietStarted());
+    try {
+      const response = await api.addDiet(token, name, quantityOfProducts, numberOfMealsPerDay, meat, description);
+      dispatch(addDietSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(addDietFailed(err.response));
+    };
+  }
+}
