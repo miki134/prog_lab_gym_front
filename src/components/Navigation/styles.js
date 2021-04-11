@@ -1,5 +1,5 @@
 const navBox = {
-    backgroundColor: 'rgb(194,194,194)',
+    backgroundColor: 'rgb(164,164,164)',
     textDecoration: 'none',
     width: '45vw',
     fontSize: '1.2rem',
@@ -9,7 +9,7 @@ const navBox = {
 };
 
 const hover = {
-    backgroundColor: 'rgb(180, 180, 180)',
+    backgroundColor: 'rgb(130, 130, 130)',
 }
 
 const a = {
@@ -54,6 +54,11 @@ const navigation = {
     overflow: 'auto',
 }
 
+const darkMode = {
+    backgroundColor: '#2B2B2B',
+    color: 'white',
+}
+
 const dropdown = {
     margin: '0px',
     padding: '0px',
@@ -74,7 +79,7 @@ const dropdownItem = {
     top: '50px',
     width: '20vw',
     height: '57px',
-    backgroundColor: 'rgb(194,194,194)',
+    backgroundColor: 'rgb(164,164,164)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -99,6 +104,7 @@ const styles = {
     hide,
     show,
     dropdownItem,
+    darkMode,
 };
 
 

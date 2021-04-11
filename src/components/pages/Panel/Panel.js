@@ -57,23 +57,26 @@ const Panel = (props) => {
 
     return (
         <div style={styles.container}>
-            <form>
-                <select style={styles.optionInput} value={value} onChange={handleChange}>
-                    <option value="default">Wybierz opcje...</option>
-                    <option value="addWorkouts">Dodaj treningi</option>
-                    <option value="addDiets">Dodaj diety</option>
-                    <option value="addEquipment">Dodaj sprzet</option>
-                    <option value="addTrainers">Dodaj trenerów</option>
-                </select>
-            </form>
-                {addWorkouts &&
-                    <AddWorkouts></AddWorkouts>}
-                {addDiets &&
-                    <AddDiets></AddDiets>}
-                {addEquipment &&
-                    <AddEquipment></AddEquipment>}
-                {addTrainers &&
-                    <AddTrainers></AddTrainers>}
+            {props.role === 'admin' &&
+                <form>
+                    <select style={styles.optionInput} value={value} onChange={handleChange}>
+                        <option value="default">Wybierz opcje...</option>
+                        <option value="addWorkouts">Dodaj treningi</option>
+                        <option value="addDiets">Dodaj diety</option>
+                        <option value="addEquipment">Dodaj sprzet</option>
+                        <option value="addTrainers">Dodaj trenerów</option>
+                    </select>
+                </form>}
+            {addWorkouts &&
+                <AddWorkouts></AddWorkouts>}
+            {addDiets &&
+                <AddDiets></AddDiets>}
+            {addEquipment &&
+                <AddEquipment></AddEquipment>}
+            {addTrainers &&
+                <AddTrainers></AddTrainers>}
+            {props.role !== 'admin' &&
+                <Error>Brak wystarczajacyh uprawnien! Zaloguj sie ponownie!</Error>}
             {props.getAllPanelError &&
                 <Error>{props.getAllPanelError}</Error>}
         </div>
@@ -83,6 +86,8 @@ const Panel = (props) => {
 const mapStateToProps = (state) => {
     return {
         data: state.auth.data,
+        role: state.auth.role,
+
         getAllPanelError: state.auth.getAllPanelError,
         getAllPanelActionEnded: state.auth.getAllPanelActionEnded,
 
@@ -92,7 +97,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            // getAllPanel,
         },
         dispatch,
     );

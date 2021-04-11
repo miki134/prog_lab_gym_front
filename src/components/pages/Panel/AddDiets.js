@@ -8,8 +8,6 @@ import Input from '../../Input';
 import Correct from '../../Correct'
 
 const AddDiets = (props) => {
-    // const [isMounted, setMounted] = useState(false);
-    // const [downloaded, setdownloaded] = useState(false);
     const [error, setError] = useState(false);
     const [sended, setSended] = useState(false);
 
@@ -18,10 +16,6 @@ const AddDiets = (props) => {
     const [numberOfMealsPerDay, setnumberOfMealsPerDay] = useState('');
     const [meat, setmeat] = useState(false);
     const [description, setdescription] = useState('');
-
-    // useEffect(() => { setdownloaded(props.getAllEquipmentActionEnded); }, [props.getAllEquipmentActionEnded]);
-
-
     const handleInputChange = (e, set) => {
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         set(value);
@@ -51,7 +45,7 @@ const AddDiets = (props) => {
 
     return (
         <div style={styles.container}>
-            {props.token &&
+            {props.token && props.role === 'admin' &&
                 <form style={styles.update}>
                     <Input
                         type="text"
@@ -70,7 +64,6 @@ const AddDiets = (props) => {
                         min={0}
                         onChange={e => handleInputChange(e, setquantityOfProducts)}
                     />
-
                     <Input
                         type="number"
                         id="numberOfMealsPerDay"
@@ -100,6 +93,8 @@ const AddDiets = (props) => {
                     <Input type="button"
                         onClick={handleAddDietClick}
                         value="Dodaj diete" />
+                    {props.role !== 'admin' &&
+                        <Error>Brak wystarczajacyh uprawnien! Zaloguj sie ponownie!</Error>}
                     {props.addDietError && sended && !props.addDietActionEnded &&
                         <Error>{props.addDietError}</Error>}
                     {error &&
@@ -119,7 +114,7 @@ const mapStateToProps = (state) => {
         token: state.auth.token,
         addDietError: state.auth.addDietError,
         addDietActionEnded: state.auth.addDietActionEnded,
-
+        role: state.auth.role,
     };
 };
 

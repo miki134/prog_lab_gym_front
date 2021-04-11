@@ -1,8 +1,12 @@
-import { AUTH, OPERATIONS } from './actionTypes';
+import { AUTH, INSIDE, OPERATIONS } from './actionTypes';
 
-const initialState = {
-  token: '',
+const initialState = () => {
+  const tok = localStorage.getItem('token');
+  const rol = localStorage.getItem('role');
+  return({
+  token: tok,
   data: '',
+  role: rol,
 
   loginError: '',
   loginActionEnded: false,
@@ -43,13 +47,18 @@ const initialState = {
 
   addDietError: '',
   addDietActionEnded: false,
+
+  setdarkmode: 'nie',
+  });
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState(), action) => {
+  console.log(action.type);
   switch (action.type) {
     case AUTH.REGISTER_STARTED: {
       return {
         ...state,
+        registerActionEnded: false, 
       };
     }
     case AUTH.REGISTER_FAILED: {
@@ -58,19 +67,26 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registerError: registerError,
+        registerActionEnded: false,
       };
     }
     case AUTH.REGISTER_SUCCEEDED: {
-      const { token } = action.payload;
+      const { token, role } = action.payload;
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
       return {
         ...state,
         token: token,
+        role: role,
+        registerActionEnded: true,
       };
     }
     case AUTH.LOGIN_STARTED: {
+      console.log('LOGIN_SUCCEEDED');
       return {
         ...state,
         loginActionEnded: false,
+        registerActionEnded: false,
       };
     }
     case AUTH.LOGIN_FAILED: {
@@ -82,16 +98,24 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case AUTH.LOGIN_SUCCEEDED: {
-      const { token } = action.payload;
+      console.log('LOGIN_SUCCEEDED');
+      const { token, role } = action.payload;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+
       return {
         ...state,
         token: token,
+        role: role,
         loginActionEnded: true,
       };
     }
     case AUTH.LOGOUT: {
+      localStorage.clear();
+      const newState = initialState();
       return {
-        ...initialState,
+        ...newState,
       };
     }
     case OPERATIONS.ALL_USERS_SUCCEEDED: {
@@ -326,6 +350,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         addTrainerActionEnded: false,
         addTrainerError: action.payload.addTrainerError,
+      }
+    }
+    case INSIDE.DARK_MODE: {
+      console.log(action.payload.setdarkmode);
+      return {
+        ...state,
+        setdarkmode: action.payload.setdarkmode,
       }
     }
     default: {

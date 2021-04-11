@@ -60,7 +60,12 @@ function Navigation(props) {
 
 
     return (
-        <div className='nav' style={styles.navigation}>
+        <div className='nav' 
+        style={{
+            ...styles.navigation,
+            ...(props.setDarkMode==='tak' ? styles.darkMode : null)
+        }}
+        >
             <ul style={styles.navMenu}>
                 <NavLinkBox to="/">Home</NavLinkBox>
                 <DropDownList>About</DropDownList>
@@ -68,7 +73,8 @@ function Navigation(props) {
                 {!props.token && <NavLinkBox to="/login">Sign in</NavLinkBox>}
                 {!props.token && <NavLinkBox to="/join">Sign up</NavLinkBox>}
 
-                {props.token && <Redirect to="/" />}
+                {props.loginActionEnded && <Redirect exact to="/" />}
+                {props.registerActionEnded && <Redirect exact to="/" />}
                 {props.token && <NavLinkBox to="/mypage" >My profile</NavLinkBox>}
                 {props.token && <NavLinkBox to="/" onClick={clear}>Log out</NavLinkBox>}
                 <NavLinkBox to="/contact">Contact</NavLinkBox>
@@ -162,6 +168,10 @@ const mapStateToProps = (state) => {
         token: state.auth.token,
         error: state.auth.error,
         data: state.auth.data,
+        loginActionEnded: state.auth.loginActionEnded,
+        registerActionEnded: state.auth.registerActionEnded,
+
+        setDarkMode: state.auth.setdarkmode,
     };
 };
 

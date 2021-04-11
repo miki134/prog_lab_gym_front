@@ -6,7 +6,7 @@ import Input from '../../Input';
 import styles from './styles.js';
 import Error from '../../Error';
 import Correct from '../../Correct/index.js';
-
+import { Redirect } from 'react-router-dom';
 
 
 const Login = (props) => {
@@ -16,6 +16,7 @@ const Login = (props) => {
 
     const [sended, setSended] = useState(false);
     const [error, setError] = useState(false);
+    // const [redirect, setred] = useState(false);
 
     // const [error, setError] = useState('');
     // const [token, setToken] = useState('')
@@ -26,11 +27,14 @@ const Login = (props) => {
 
     // console.log(props);
     //setToken('aaaaa');
-    // console.log(token);
+    // // console.log(token);
+    // useEffect(() => {setred(props.loginActionEnded);}, []);
 
+    // console.log(props.loginActionEnded);
     const handleInputChange = (e, setter) => {
         setter(e.target.value);
     };
+    console.log("props.loginActionEnded",props.loginActionEnded);
 
     const handleLoginClick = () => {
         if (!email || !password) {
@@ -75,7 +79,6 @@ const Login = (props) => {
 
     //     // }
     // }
-
     return (
         <div style={styles.container}>
             {!props.token &&
@@ -95,6 +98,10 @@ const Login = (props) => {
                         onChange={(e) => handleInputChange(e, setPassword)} />
 
                     <Input type="button" onClick={handleLoginClick} value="Zaloguj" />
+                    
+                    {props.loginActionEnded &&
+                        <Redirect to='/' />}
+
                     {props.loginError && sended &&
                         <Error>{props.loginError}</Error>}
                     {error &&
@@ -113,6 +120,8 @@ const mapStateToProps = (state) => {
     return {
         token: state.auth.token,
         loginError: state.auth.loginError,
+        loginActionEnded: state.auth.loginActionEnded,
+        role: state.auth.role,
     };
 };
 

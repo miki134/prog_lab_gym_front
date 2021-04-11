@@ -6,6 +6,7 @@ import Input from "../../Input";
 import styles from './styles.js';
 import Error from '../../Error';
 import Correct from '../../Correct/index.js';
+import { Redirect } from 'react-router-dom';
 
 const Register = (props) => {
     const [name, setName] = useState('');
@@ -68,6 +69,10 @@ const Register = (props) => {
                         onChange={e => handleInputChange(e, setPassword)}
                     />
                     <Input type="button" onClick={handleRegisterClick} value="Zarejestruj" />
+
+                    {props.registerActionEnded &&
+                        <Redirect exact to='/' />}
+
                     {props.registerError && sended &&
                         <Error>{props.registerError}</Error>}
                     {error &&
@@ -81,9 +86,12 @@ const Register = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         token: state.auth.token,
         registerError: state.auth.registerError,
+        registerActionEnded: state.auth.registerActionEnded,
+        role: state.auth.role,
     };
 };
 

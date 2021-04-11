@@ -53,3 +53,7 @@ export const OPERATIONS = {
   ADD_DIET_FAILED: 'operations/add_diet_started',
   ADD_DIET_STARTED: 'operations/add_diet_failed',
 }
+
+export const INSIDE = {
+  DARK_MODE: 'inside/dark_mode',
+}

@@ -1,5 +1,6 @@
-import { AUTH, OPERATIONS } from './actionTypes';
+import { AUTH, OPERATIONS, INSIDE } from './actionTypes';
 import api from '../api/handle.js';
+import { connectAdvanced } from 'react-redux';
 
 const userRegistrationStarted = () => {
   return {
@@ -7,11 +8,12 @@ const userRegistrationStarted = () => {
   };
 };
 
-const userRegistrationSucceeded = (token) => {
+const userRegistrationSucceeded = (data) => {
   return {
     type: AUTH.REGISTER_SUCCEEDED,
     payload: {
-      token: token,
+      token: data.token,
+      role: data.data,
     },
   };
 };
@@ -31,7 +33,7 @@ export const registerUser = (name, surname, email, password) => {
     dispatch(userRegistrationStarted());
     try {
       const response = await api.register(name, surname, email, password);
-      dispatch(userRegistrationSucceeded(response.token));
+      dispatch(userRegistrationSucceeded(response));
     } catch (err) {
       dispatch(userRegistrationFailed(err.response));
     }
@@ -44,11 +46,13 @@ const loginStarted = () => {
   };
 };
 
-const loginSucceeded = (token) => {
+const loginSucceeded = (data) => {
+  console.log('action loin suc');
   return {
     type: AUTH.LOGIN_SUCCEEDED,
     payload: {
-      token: token,
+      token: data.token,
+      role: data.data,
     },
   };
 };
@@ -67,7 +71,8 @@ export const loginUser = (email, password) => {
     dispatch(loginStarted());
     try {
       const response = await api.login(email, password);
-      dispatch(loginSucceeded(response.token));
+      console.log(response);
+      dispatch(loginSucceeded(response));
     } catch (err) {
       console.log(err.response);
       dispatch(loginFailed(err.response));
@@ -492,5 +497,21 @@ export const addTrainer = (token, name, surname, birthday, phone, description) =
       console.log(err.response);
       dispatch(addTrainerFailed(err.response));
     };
+  }
+}
+
+
+const setDark = (val) => {
+  return {
+    type: INSIDE.DARK_MODE,
+    payload: {
+      setdarkmode: val,
+    },
+  };
+}
+
+export const setDarkMode = (val) => {
+  return async (dispatch) => {
+    dispatch(setDark(val));
   }
 }

@@ -22,7 +22,7 @@ const styledHeader = {
 }
 
 const styledBody = {
-    borderBottom: "1px solid #dddddd",
+    // borderBottom: "1px solid #dddddd",
 }
 
 const styledCells = {
