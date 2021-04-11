@@ -7,6 +7,7 @@ import Error from '../../Error/index.js';
 import AddWorkouts from './AddWorkouts.js';
 import AddDiets from './AddDiets.js';
 import AddEquipment from './AddEquipment.js';
+import AddTrainers from './AddTrainers.js';
 
 const Panel = (props) => {
     const [isMounted, setMounted] = useState(false);
@@ -63,7 +64,6 @@ const Panel = (props) => {
                     <option value="addDiets">Dodaj diety</option>
                     <option value="addEquipment">Dodaj sprzet</option>
                     <option value="addTrainers">Dodaj trenerów</option>
-                    <option value="changeUserPrivileges">Zmien uprawnienia uzytkownika</option>
                 </select>
             </form>
                 {addWorkouts &&
@@ -73,7 +73,7 @@ const Panel = (props) => {
                 {addEquipment &&
                     <AddEquipment></AddEquipment>}
                 {addTrainers &&
-                    <div>{'addTrainers'}</div>}
+                    <AddTrainers></AddTrainers>}
             {props.getAllPanelError &&
                 <Error>{props.getAllPanelError}</Error>}
         </div>

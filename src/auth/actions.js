@@ -456,3 +456,41 @@ export const addEquipment = (token, name, length, height, width, weight, descrip
     };
   }
 }
+
+const addTrainerSucceeded = (data) => {
+  return {
+    type: OPERATIONS.ADD_TRAINER_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const addTrainerFailed = (err) => {
+  console.log(err.data.error);
+  return {
+    type: OPERATIONS.ADD_TRAINER_FAILED,
+    payload: {
+      addTrainerError: err.data.error,
+    },
+  };
+}
+
+const addTrainerStarted = () => {
+  return {
+    type: OPERATIONS.ADD_TRAINER_STARTED,
+  };
+}
+
+export const addTrainer = (token, name, surname, birthday, phone, description) => {
+  return async (dispatch) => {
+    dispatch(addTrainerStarted());
+    try {
+      const response = await api.addTrainer(token, name, surname, birthday, phone, description);
+      dispatch(addTrainerSucceeded(response.data));
+    } catch (err) {
+      console.log(err.response);
+      dispatch(addTrainerFailed(err.response));
+    };
+  }
+}

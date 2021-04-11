@@ -23,6 +23,9 @@ const initialState = {
   getAllTrainersError: '',
   getAllTrainersActionEnded: false,
 
+  addTrainerError: '',
+  addTrainerActionEnded: false,
+
   getAllEquipmentError: '',
   getAllEquipmentActionEnded: false,
 
@@ -301,6 +304,28 @@ const authReducer = (state = initialState, action) => {
         ...state,
         addEquipmentActionEnded: false,
         addEquipmentError: action.payload.addEquipmentError,
+      }
+    }
+    case OPERATIONS.ADD_TRAINER_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        addTrainerActionEnded: true,
+      }
+    }
+    case OPERATIONS.ADD_TRAINER_STARTED:
+      {
+        return {
+          ...state,
+          addTrainerActionEnded: false,
+        }
+      }
+    case OPERATIONS.ADD_TRAINER_FAILED: {
+      console.log(action.payload.addTrainerError);
+      return {
+        ...state,
+        addTrainerActionEnded: false,
+        addTrainerError: action.payload.addTrainerError,
       }
     }
     default: {

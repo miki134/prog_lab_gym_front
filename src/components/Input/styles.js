@@ -6,7 +6,7 @@ const textInput = {
     boxSizing: 'border-box',
     marginTop: '6px',
     marginBottom: '16px',
-    resize: 'vertical',
+    resize: 'none',
 }
 const button = {
     backgroundColor: '#4CAF50',

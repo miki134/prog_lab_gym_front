@@ -25,6 +25,10 @@ export const OPERATIONS = {
   ALL_TRAINERS_STARTED: 'operations/all_trainers_started',
   ALL_TRAINERS_FAILED: 'operations/all_trainers_failed',
 
+  ADD_TRAINER_SUCCEEDED: 'operations/add_trainers_succeeded',
+  ADD_TRAINER_FAILED: 'operations/add_trainers_started',
+  ADD_TRAINER_STARTED: 'operations/add_trainers_failed',
+  
   ALL_EQUIPMENT_SUCCEEDED: 'operations/all_equipment_succeeded',
   ALL_EQUIPMENT_STARTED: 'operations/all_equipment_started',
   ALL_EQUIPMENT_FAILED: 'operations/all_equipment_failed',
