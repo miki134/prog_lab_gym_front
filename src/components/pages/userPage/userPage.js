@@ -41,7 +41,6 @@ const UserPage = (props) => {
         else
             props.setDarkMode('nie');
     };
-
     return (
         <div style={styles.container}>
             {props.token &&

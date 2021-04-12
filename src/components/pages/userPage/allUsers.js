@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllUsers } from '../../../auth/actions.js';
 import Error from '../../Error/index.js';
 import styles from './styles.js';
 
 const AllUsers = (props) => {
     let keyId = 0;
+
     return (
         <div style={styles.outTab}>
             {props.token && <table style={styles.styledTable}>
@@ -36,7 +36,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            getAllUsers,
         },
         dispatch,
     );

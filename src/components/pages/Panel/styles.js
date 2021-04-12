@@ -3,7 +3,8 @@ const container = {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    overflow: 'auto',
+    // overflow: 'auto',
+    marginTop: '57px',
 
 }
 

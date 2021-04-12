@@ -8,6 +8,7 @@ import AddWorkouts from './AddWorkouts.js';
 import AddDiets from './AddDiets.js';
 import AddEquipment from './AddEquipment.js';
 import AddTrainers from './AddTrainers.js';
+import SelectUser from './SelectUser.js';
 
 const Panel = (props) => {
     const [isMounted, setMounted] = useState(false);
@@ -18,6 +19,7 @@ const Panel = (props) => {
     const [addDiets, setAddDiets] = useState(false);
     const [addEquipment, setAddEquipment] = useState(false);
     const [addTrainers, setAddTrainers] = useState(false);
+    const [updateUsers, setUpdateUsers] = useState(false);
 
 
     const [value, setValue] = useState('default');
@@ -35,6 +37,7 @@ const Panel = (props) => {
         setAddDiets(false);
         setAddEquipment(false);
         setAddTrainers(false);
+        setUpdateUsers(false);
 
         switch (event.target.value) {
             case 'addWorkouts':
@@ -48,6 +51,9 @@ const Panel = (props) => {
                 break;
             case 'addTrainers':
                 setAddTrainers(true);
+                break;
+            case 'updateUsers':
+                setUpdateUsers(true);
                 break;
             default:
 
@@ -65,6 +71,7 @@ const Panel = (props) => {
                         <option value="addDiets">Dodaj diety</option>
                         <option value="addEquipment">Dodaj sprzet</option>
                         <option value="addTrainers">Dodaj trenerów</option>
+                        <option value="updateUsers">Zamien dane użytkowników</option>
                     </select>
                 </form>}
             {addWorkouts &&
@@ -75,6 +82,8 @@ const Panel = (props) => {
                 <AddEquipment></AddEquipment>}
             {addTrainers &&
                 <AddTrainers></AddTrainers>}
+            {updateUsers &&
+                <SelectUser></SelectUser>}
             {props.role !== 'admin' &&
                 <Error>Brak wystarczajacyh uprawnien! Zaloguj sie ponownie!</Error>}
             {props.getAllPanelError &&

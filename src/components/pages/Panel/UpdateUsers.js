@@ -1,16 +1,16 @@
-import styles from "./styles";
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateUser } from '../../../auth/actions.js';
-import Input from "../../Input";
-import Error from '../../Error';
-import Correct from '../../Correct/index.js';
+import React, { useState } from 'react';
+import styles from './styles.js';
+import Error from '../../Error/index.js';
+import Input from '../../Input';
+import Correct from '../../Correct'
 
-const UpdateUser = (props) => {
+const UpdateUsers = (props) => {
     const [name, setName] = useState(props.data[0]);
     const [surname, setSurname] = useState(props.data[1]);
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState(props.data[3]);
 
     const [changeName, setChangeName] = useState(true);
     const [changeSurname, setChangeSurname] = useState(true);
@@ -27,14 +27,15 @@ const UpdateUser = (props) => {
     const handleUpdateUserClick = () => {
         if ((!changeName && !name) ||
             (!changeSurname && !surname) ||
-            (!changePassword && !password)) {
+            (!changePassword && !password) ||
+            (!changeRole && !role)) {
             setError(true);
         }
         else {
             setSended(true);
             setError(false);
 
-            props.updateUser(props.token, name, surname, props.data[2], password, '');
+            props.updateUser(props.token, name, surname, props.data[2], password, role);
         }
     };
 
@@ -79,6 +80,19 @@ const UpdateUser = (props) => {
                         onClick={e => setChangePassword(!changePassword)}
                         value="Zmień haslo" />
 
+                    <Input
+                        type="text"
+                        id="role"
+                        name="Role"
+                        placeholder="Your role..."
+                        value={role}
+                        onChange={e => handleInputChange(e, setRole)}
+                        disabled={changeRole} />
+                    <Input
+                        type="button"
+                        onClick={e => setChangeRole(!changeRole)}
+                        value="Zmień uprawnienia" />
+
                     <Input type="button"
                         onClick={handleUpdateUserClick}
                         value="Zatwierdź" />
@@ -98,10 +112,11 @@ const UpdateUser = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        updateUserData: state.auth.updateUserData,
         token: state.auth.token,
-        data: state.auth.data,
-        updateUserError: state.auth.updateUserError,
-        updateUserActionEnded: state.auth.updateUserActionEnded,
+        role: state.auth.role,
+        addWorkoutError: state.auth.addWorkoutError,
+        addWorkoutActionEnded: state.auth.addWorkoutActionEnded,
 
     };
 };
@@ -109,10 +124,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            updateUser,
         },
         dispatch,
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUsers);

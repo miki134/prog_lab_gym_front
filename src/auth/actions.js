@@ -1,6 +1,5 @@
 import { AUTH, OPERATIONS, INSIDE } from './actionTypes';
 import api from '../api/handle.js';
-import { connectAdvanced } from 'react-redux';
 
 const userRegistrationStarted = () => {
   return {
@@ -115,7 +114,7 @@ export const getAllUsers = (token) => {
     dispatch(allUsersStarted());
     try {
       const response = await api.getAllUsers(token);
-      dispatch(allUsersSucceeded(response.data));
+      dispatch(allUsersSucceeded(response));
     } catch (err) {
       dispatch(allUsersFailed(err.response));
     };
@@ -151,7 +150,7 @@ export const getOneUser = (token) => {
     dispatch(oneUsersStarted());
     try {
       const response = await api.getOneUser(token);
-      dispatch(oneUsersSucceeded(response.data));
+      dispatch(oneUsersSucceeded(response));
     } catch (err) {
       dispatch(oneUsersFailed(err.response));
     };

@@ -119,9 +119,11 @@ const authReducer = (state = initialState(), action) => {
       };
     }
     case OPERATIONS.ALL_USERS_SUCCEEDED: {
+      const { data } = action.payload;
       return {
         ...state,
-        data: action.payload.data,
+        data: data.data,
+        token: data.token,
         getAllUsersActionEnded: true,
       }
     }
@@ -139,9 +141,11 @@ const authReducer = (state = initialState(), action) => {
       }
     }
     case OPERATIONS.ONE_USER_SUCCEEDED: {
+      const { data } = action.payload;
       return {
         ...state,
-        data: action.payload.data,
+        data: data.data,
+        token: data.token,
         getOneUserActionEnded: true,
       }
     }
