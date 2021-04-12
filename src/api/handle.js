@@ -50,6 +50,17 @@ const updateUser = async (token, name, surname, email, password, role) => {
     }, token)
 }
 
+const deleteUser = async (token, name, surname, email, password, role) => {
+    console.log('deleteUser');
+    return await request(ENDPOINTS.DELETE_USER, {
+        name,
+        surname,
+        email,
+        password,
+        role,
+    }, token)
+}
+
 const getAllTrainers = async () => {
     return await request(ENDPOINTS.GET_TRAINERS, {})
 }
@@ -121,6 +132,7 @@ const api = {
     addDiet,
     addEquipment,
     addTrainer,
+    deleteUser,
 };
 
 export default api;

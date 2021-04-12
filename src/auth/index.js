@@ -47,6 +47,9 @@ const initialState = () => {
 
   addDietError: '',
   addDietActionEnded: false,
+  
+  deleteUserError: '',
+  deleteUserActionEnded: false,
 
   setdarkmode: 'nie',
   });
@@ -354,6 +357,28 @@ const authReducer = (state = initialState(), action) => {
         ...state,
         addTrainerActionEnded: false,
         addTrainerError: action.payload.addTrainerError,
+      }
+    }
+    case OPERATIONS.DELETE_USER_SUCCEEDED: {
+      return {
+        ...state,
+        data: action.payload.data,
+        deleteUserActionEnded: true,
+      }
+    }
+    case OPERATIONS.DELETE_USER_STARTED:
+      {
+        return {
+          ...state,
+          deleteUserActionEnded: false,
+        }
+      }
+    case OPERATIONS.DELETE_USER_FAILED: {
+      console.log(action.payload.deleteUserError);
+      return {
+        ...state,
+        deleteUserActionEnded: false,
+        deleteUserError: action.payload.deleteUserError,
       }
     }
     case INSIDE.DARK_MODE: {

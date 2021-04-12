@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllUsers, updateUser } from '../../../auth/actions.js';
+import { getAllUsers, updateUser, deleteUser } from '../../../auth/actions.js';
 import React, { useState, useEffect } from 'react';
 import styles from './styles.js';
 import Error from '../../Error/index.js';
@@ -12,15 +12,15 @@ const SelectUser = (props) => {
     const [sended, setSended] = useState(false);
     const [error, setError] = useState(false);
 
-    const [name, setName] = useState(props.data[0]);
-    const [surname, setSurname] = useState(props.data[1]);
-    const [email, setemail] = useState(props.data[1]);
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState(props.data[3]);
+    const [role, setRole] = useState('');
+    const [del, setdel] = useState(false);
 
     const [isMounted, setMounted] = useState(false);
     const [downloaded, setdownloaded] = useState(false);
-    const [abc, setabc] = useState(false);
 
     const [updateUser, setUpdateUser] = useState(false);
 
@@ -37,20 +37,25 @@ const SelectUser = (props) => {
 
     useEffect(() => { setdownloaded(props.getAllUsersActionEnded); }, [props.getAllUsersActionEnded]);
     useEffect(() => { props.getAllUsers(props.token); }, [props.updateUserActionEnded]);
+    useEffect(() => { props.getAllUsers(props.token); }, [props.deleteUserActionEnded]);
+    // useEffect(() => { props.deleteUser(props.token, name, surname, email, password, role); }, [del]);
 
     const handleInputChange = (e, set) => {
         set(e.target.value);
     };
 
     const handleChange = (event) => {
+        console.log(keyId);
         setvalue(event.target.value);
         // console.log(event.target.value);
         // console.log(props.data);
-        setName(props.data[event.target.value][0]);
-        setSurname(props.data[event.target.value][1]);
-        setemail(props.data[event.target.value][2]);
-        setRole(props.data[event.target.value][3]);
+        if (props.data) {
 
+            setName(props.data[event.target.value][0]);
+            setSurname(props.data[event.target.value][1]);
+            setemail(props.data[event.target.value][2]);
+            setRole(props.data[event.target.value][3]);
+        }
 
         setUpdateUser(true);
     };
@@ -70,17 +75,39 @@ const SelectUser = (props) => {
         }
     };
 
+    const handleDelete = () => {
+        console.log(value);
+
+        if (value !== 'default' && !del) {
+            setSended(true);
+            setError(false);
+            setdel(true);
+            // setvalue('default');
+            // setUpdateUser(false);
+
+            props.deleteUser(props.token, name, surname, email, password, role);
+            setName('');
+            setSurname('');
+            setemail('');
+            setRole('');
+            console.log(value);
+        }
+        else {
+            setError(true);
+        }
+    }
+
     let keyId = -1;
-    console.log(keyId);
+    // console.log(keyId);
     return (
         <div>
             {props.role === 'admin' && downloaded &&
                 <form>
                     <select style={styles.optionInput} value={value} onChange={handleChange}>
                         <option value="default">Wybierz opcje...</option>
-                        {props.data.map(item => {
+                        {props.data?.length ? props.data.map(item => {
                             return (<option value={++keyId} key={keyId}>Name: {item[0]} Email: {item[2]}</option>)
-                        })}
+                        }) : null}
                     </select>
                 </form>}
             {!props.token && <Error>Sesja wygasla! Zaloguj sie!</Error>}
@@ -137,11 +164,19 @@ const SelectUser = (props) => {
                         onClick={e => setChangeRole(!changeRole)}
                         value="Zmień uprawnienia" />
 
+
                     <Input type="button"
                         onClick={handleUpdateUserClick}
                         value="Zatwierdź" />
+
+                    <Input type="button"
+                        onClick={handleDelete}
+                        value="Usuń użytwkownika" />
+
                     {props.updateUserError && sended && !props.updateUserActionEnded &&
                         <Error>{props.updateUserError}</Error>}
+                    {props.deleteUserError && sended && !props.deleteUserActionEnded &&
+                        <Error>{props.deleteUserError}</Error>}
                     {error &&
                         <Error>Wypelnij wszystkie pola!</Error>}
                     {props.updateUserActionEnded &&
@@ -156,12 +191,16 @@ const SelectUser = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         data: state.auth.data,
         role: state.auth.role,
         token: state.auth.token,
         getAllUsersError: state.auth.getAllUsersError,
         getAllUsersActionEnded: state.auth.getAllUsersActionEnded,
+
+        deleteUserError: state.auth.deleteUserError,
+        deleteUserActionEnded: state.auth.deleteUserActionEnded,
 
         updateUserError: state.auth.updateUserError,
         updateUserActionEnded: state.auth.updateUserActionEnded,
@@ -173,6 +212,7 @@ const mapDispatchToProps = (dispatch) => {
         {
             getAllUsers,
             updateUser,
+            deleteUser,
         },
         dispatch,
     );

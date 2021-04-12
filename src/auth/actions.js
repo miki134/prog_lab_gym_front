@@ -499,6 +499,46 @@ export const addTrainer = (token, name, surname, birthday, phone, description) =
   }
 }
 
+const deleteUserSucceeded = (data) => {
+  return {
+    type: OPERATIONS.DELETE_USER_SUCCEEDED,
+    payload: {
+      data,
+    },
+  };
+}
+
+const deleteUserFailed = (err) => {
+  console.log(err);
+  return {
+    type: OPERATIONS.DELETE_USER_FAILED,
+    payload: {
+      // deleteUserError: err.data.error,
+    },
+  };
+}
+
+const deleteUserStarted = () => {
+  return {
+    type: OPERATIONS.DELETE_USER_STARTED,
+  };
+}
+
+export const deleteUser = (token, name, surname, birthday, phone, description) => {
+  return async (dispatch) => {
+    dispatch(deleteUserStarted());
+    try {
+      const response = await api.deleteUser(token, name, surname, birthday, phone, description);
+      console.log(response);
+
+      dispatch(deleteUserSucceeded(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(deleteUserFailed(err.response));
+    };
+  }
+}
+
 
 const setDark = (val) => {
   return {

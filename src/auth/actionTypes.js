@@ -28,7 +28,7 @@ export const OPERATIONS = {
   ADD_TRAINER_SUCCEEDED: 'operations/add_trainers_succeeded',
   ADD_TRAINER_FAILED: 'operations/add_trainers_started',
   ADD_TRAINER_STARTED: 'operations/add_trainers_failed',
-  
+
   ALL_EQUIPMENT_SUCCEEDED: 'operations/all_equipment_succeeded',
   ALL_EQUIPMENT_STARTED: 'operations/all_equipment_started',
   ALL_EQUIPMENT_FAILED: 'operations/all_equipment_failed',
@@ -52,6 +52,10 @@ export const OPERATIONS = {
   ADD_DIET_SUCCEEDED: 'operations/add_diet_succeeded',
   ADD_DIET_FAILED: 'operations/add_diet_started',
   ADD_DIET_STARTED: 'operations/add_diet_failed',
+
+  DELETE_USER_SUCCEEDED: 'operations/delete_user_succeeded',
+  DELETE_USER_FAILED: 'operations/delete_user_started',
+  DELETE_USER_STARTED: 'operations/delete_user_failed',
 }
 
 export const INSIDE = {
